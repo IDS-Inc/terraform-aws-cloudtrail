@@ -72,12 +72,6 @@ variable "event_selector" {
   default     = []
 }
 
-variable "data_resource" {
-  type        = "list"
-  description = "Specifies a data resource for enabling data event logging, It needs to be a list of map values. See: https://www.terraform.io/docs/providers/aws/r/cloudtrail.html for details on this map variable"
-  default     = []
-}
-
 variable "kms_key_id" {
   description = "Specifies the KMS key ARN to use to encrypt the logs delivered by CloudTrail"
   default     = ""
