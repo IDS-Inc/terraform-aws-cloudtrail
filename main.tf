@@ -18,6 +18,20 @@ resource "aws_cloudtrail" "default" {
   cloud_watch_logs_role_arn     = "${var.cloud_watch_logs_role_arn}"
   cloud_watch_logs_group_arn    = "${var.cloud_watch_logs_group_arn}"
   tags                          = "${module.cloudtrail_label.tags}"
-  event_selector                = "${var.event_selector}"
   kms_key_id                    = "${var.kms_key_id}"
+
+  event_selector {
+    read_write_type           = "All"
+    include_management_events = "true"
+
+    data_resource {
+      type   = "AWS::S3::Object"
+      values = [ "arn:aws:s3:::"]
+    }
+
+    data_resource {
+      type   = "AWS::Lambda::Function"
+      values = ["arn:aws:lambda"]
+    }
+  }
 }
